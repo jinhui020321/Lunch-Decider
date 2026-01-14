@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今天午饭吃什么</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f5f5f5;
+    padding-top: 100px;
+}
+
+#result {
+    font-size: 32px;
+    margin: 40px 0;
+}
+
+button {
+    font-size: 24px;
+    padding: 15px 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+    <h1>今天午饭吃什么？</h1>
+    <div id="result">点我决定</div>
+    <button onclick="randomLunch()">随机</button>
+
+<script>
+const lunches = ["拉面", "盖饭", "汉堡", "麻辣烫", "炒面", "饺子"];
+
+function randomLunch() {
+    const i = Math.floor(Math.random() * lunches.length);
+    document.getElementById("result").innerText = lunches[i];
+}
+</script>
+</body>
+</html>
