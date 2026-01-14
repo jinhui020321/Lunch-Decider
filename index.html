@@ -57,21 +57,32 @@ button {
 <button onclick="randomRestaurant()">随机</button>
 
 <script>
-const restaurants = [
-  { name: "老王盖饭", tags: ["饭类"] },
-  { name: "小李拉面", tags: ["面类"] },
-  { name: "川味麻辣烫", tags: ["饭类"] },
-  { name: "便利店", tags: ["休息天"] },
-  { name: "沙县小吃", tags: ["饭类", "面类"] }
-];
+let restaurants = [];
 
+// 1️⃣ 动态加载 JSON
+fetch('restaurants.json')
+  .then(response => response.json())
+  .then(data => {
+    restaurants = data;
+  })
+  .catch(err => {
+    document.getElementById("result").innerText = "加载餐厅列表失败 😢";
+    console.error(err);
+  });
+
+// 2️⃣ 随机函数
 function randomRestaurant() {
-    // 1. 获取选中的标签
+    if (restaurants.length === 0) {
+        document.getElementById("result").innerText = "餐厅列表未加载完成，请稍等";
+        return;
+    }
+
+    // 获取选中的标签
     const checkedTags = Array.from(
         document.querySelectorAll('.filters input:checked')
     ).map(input => input.value);
 
-    // 2. 根据条件筛选餐厅
+    // 根据条件筛选餐厅
     let filtered = restaurants;
 
     if (checkedTags.length > 0) {
@@ -80,13 +91,13 @@ function randomRestaurant() {
         );
     }
 
-    // 3. 没有符合条件的情况
+    // 没有符合条件
     if (filtered.length === 0) {
         document.getElementById("result").innerText = "没有符合条件的餐厅 😅";
         return;
     }
 
-    // 4. 随机选择
+    // 随机选择
     const i = Math.floor(Math.random() * filtered.length);
     document.getElementById("result").innerText = filtered[i].name;
 }
