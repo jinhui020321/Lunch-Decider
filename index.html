@@ -60,7 +60,7 @@ button {
 let restaurants = [];
 
 // 1️⃣ 动态加载 JSON
-fetch('restaurants.json')
+fetch('restaurant.json')
   .then(response => response.json())
   .then(data => {
     restaurants = data;
@@ -105,5 +105,6 @@ function randomRestaurant() {
 
 </body>
 </html>
+
 
 
